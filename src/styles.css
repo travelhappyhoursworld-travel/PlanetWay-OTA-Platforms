@@ -1,0 +1,96 @@
+body{
+  margin:0;
+  font-family:Poppins;
+  background:#eef6ff;
+}
+
+/* LOGIN */
+.loginPage{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.loginBox{
+  background:white;
+  padding:40px;
+  border-radius:12px;
+  box-shadow:0 5px 20px rgba(0,0,0,.1);
+  text-align:center;
+}
+
+.loginBox input{
+  display:block;
+  margin:10px auto;
+  padding:10px;
+  width:220px;
+}
+
+.loginBox button{
+  background:#2c7be5;
+  color:white;
+  border:none;
+  padding:10px 20px;
+  cursor:pointer;
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  padding:20px;
+  background:white;
+}
+
+.logo{
+  color:#2c7be5;
+  font-weight:bold;
+}
+
+.nav span{
+  margin:0 10px;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:40px;
+}
+
+.searchBox{
+  margin-top:20px;
+}
+
+.searchBox input{
+  padding:10px;
+  margin:5px;
+}
+
+.searchBox button{
+  background:#2c7be5;
+  color:white;
+  border:none;
+  padding:10px 15px;
+}
+
+/* RESULTS */
+.results{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:20px;
+}
+
+.card{
+  background:white;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.card img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+}

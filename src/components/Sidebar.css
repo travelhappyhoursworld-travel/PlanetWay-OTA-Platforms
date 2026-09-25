@@ -1,0 +1,29 @@
+.sidebar{
+width:260px;
+background:#0f172a;
+color:white;
+padding:30px 20px;
+}
+
+.logo{
+font-size:28px;
+font-weight:700;
+margin-bottom:30px;
+}
+
+.menu{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.menu div{
+padding:14px;
+border-radius:12px;
+cursor:pointer;
+transition:.3s;
+}
+
+.menu div:hover{
+background:#2563eb;
+}

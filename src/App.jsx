@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { db } from "./firebase";
 import {
   doc,
@@ -19,7 +19,7 @@ const LANGUAGE_KEY = "planetway_language";
    OVO JE PRAVI JEZIČKI SISTEM
 ========================================================= */
 
-const languageOptions = [{ code: "en", name: "English", native: "English", region: "EN", flag: "EN" },{ code: "zh", name: "Chinese", native: "中文", region: "ZH", flag: "ZH" },{ code: "es", name: "Spanish", native: "Español", region: "ES", flag: "ES" },{ code: "ar", name: "Arabic", native: "العربية", region: "AR", flag: "AR" },{ code: "hi", name: "Hindi", native: "हनद", region: "HI", flag: "HI" },{ code: "pt", name: "Portuguese", native: "Português", region: "PT", flag: "PT" },{ code: "fr", name: "French", native: "Français", region: "FR", flag: "FR" },{ code: "ru", name: "Russian", native: "Русский", region: "RU", flag: "RU" },{ code: "de", name: "German", native: "Deutsch", region: "DE", flag: "DE" },{ code: "ja", name: "Japanese", native: "日本語", region: "JA", flag: "JA" },{ code: "it", name: "Italian", native: "Italiano", region: "IT", flag: "IT" },{ code: "sr", name: "Serbian", native: "Srpski", region: "SR", flag: "SR" }];
+const languageOptions = [{ code: "en", name: "English", native: "English", region: "EN", flag: "EN" },{ code: "zh", name: "Chinese", native: "中文", region: "ZH", flag: "ZH" },{ code: "es", name: "Spanish", native: "Español", region: "ES", flag: "ES" },{ code: "ar", name: "Arabic", native: "العربية", region: "AR", flag: "AR" },{ code: "hi", name: "Hindi", native: "हनद", region: "HI", flag: "HI" },{ code: "pt", name: "Portuguese", native: "Português", region: "PT", flag: "PT" },{ code: "fr", name: "French", native: "Français", region: "FR", flag: "FR" },{ code: "ru", name: "Russian", native: "Русский", region: "RU", flag: "RU" },{ code: "de", name: "German", native: "Deutsch", region: "DE", flag: "DE" },{ code: "ja", name: "Japanese", native: "日本語", region: "JA", flag: "JA" },{ code: "it", name: "Italian", native: "Italiano", region: "IT", flag: "IT" },{ code: "sr", name: "Serbian", native: "Srpski", region: "SR", flag: "SR" },{ code: "tr", name: "Turkish", native: "Türkçe", region: "TR", flag: "TR" },{ code: "el", name: "Greek", native: "Ελληνικά", region: "EL", flag: "EL" },{ code: "nl", name: "Dutch", native: "Nederlands", region: "NL", flag: "NL" },{ code: "pl", name: "Polish", native: "Polski", region: "PL", flag: "PL" }];
 
 /* =========================================================
    COMPLETE TRANSLATION DICTIONARY
@@ -85,6 +85,8 @@ const translations = {
 
     searchResults: "SEARCH RESULTS",
     availableArrangements: "Available PlanetWay arrangements",
+    topDestinations: "Top Destinations",
+    popularDestinations: "Popular destinations from PlanetWay travelers",
     matchingDestination: "Results matching your destination.",
     noResults: "No results found",
     tryAnother: "Try another destination.",
@@ -3330,13 +3332,13 @@ export default function App() {
 function LanguageSelector({ language, setLanguage }) {
   const [open, setOpen] = useState(false);
   const selected = languageOptions.find((item) => item.code === language) || languageOptions[0];
-  const visibleLanguages = languageOptions.slice(0, 12);
+  const visibleLanguages = languageOptions.slice(0, 15);
   const flags = { en: String.fromCodePoint(0x1F1EC,0x1F1E7), zh: String.fromCodePoint(0x1F1E8,0x1F1F3), es: String.fromCodePoint(0x1F1EA,0x1F1F8), ar: String.fromCodePoint(0x1F1E6,0x1F1EA), hi: String.fromCodePoint(0x1F1EE,0x1F1F3), pt: String.fromCodePoint(0x1F1F5,0x1F1F9), fr: String.fromCodePoint(0x1F1EB,0x1F1F7), ru: String.fromCodePoint(0x1F1F7,0x1F1FA), de: String.fromCodePoint(0x1F1E9,0x1F1EA), ja: String.fromCodePoint(0x1F1EF,0x1F1F5), it: String.fromCodePoint(0x1F1EE,0x1F1F9), sr: String.fromCodePoint(0x1F1F7,0x1F1F8) };
 
   return (
     <div className="planetway-language-selector">
       <button type="button" className="pw-language-trigger" aria-haspopup="dialog" aria-expanded={open} onClick={() => setOpen(true)}>
-        <span className="pw-language-trigger-flag">{flags[selected.code]}</span>
+        <img className="pw-language-trigger-flag" src={`https://flagcdn.com/w40/${({en:"gb",zh:"cn",es:"es",ar:"sa",hi:"in",pt:"pt",fr:"fr",ru:"ru",de:"de",ja:"jp",it:"it",sr:"rs",tr:"tr",el:"gr",nl:"nl",pl:"pl"})[selected.code]}.png`} alt="" aria-hidden="true" />
         <span>{selected.native}</span>
         <span className="pw-language-arrow" aria-hidden="true"></span>
       </button>
@@ -3355,7 +3357,7 @@ function LanguageSelector({ language, setLanguage }) {
             <div className="pw-language-list">
               {visibleLanguages.map((item) => (
                 <button key={item.code} type="button" className={item.code === language ? "pw-language-option active" : "pw-language-option"} onClick={() => { setLanguage(item.code); setOpen(false); }}>
-                  <span className="pw-language-flag" aria-hidden="true">{flags[item.code]}</span>
+                  <img className="pw-language-flag" src={`https://flagcdn.com/w40/${({en:"gb",zh:"cn",es:"es",ar:"sa",hi:"in",pt:"pt",fr:"fr",ru:"ru",de:"de",ja:"jp",it:"it",sr:"rs",tr:"tr",el:"gr",nl:"nl",pl:"pl"})[item.code]}.png`} alt="" aria-hidden="true" />
                   <span className="pw-language-text">
                     <span className="pw-language-native">{item.native}</span>
                     <span className="pw-language-name">{item.name}</span>
@@ -6764,6 +6766,9 @@ function EmployeeDashboard({
 ========================================================= */
 
 function UserDashboard() {
+  const language = getStoredLanguage();
+  const t = (key) => getTranslation(language, key);
+
   const currentUser = getCurrentUser();
   const userName = currentUser?.name || "Marko Bazovic";
   const userEmail = currentUser?.email || "traveler@planetway.com";
@@ -10608,6 +10613,9 @@ function DashboardStyles() {
 `}</style>
   );
 }
+
+
+
 
 
 

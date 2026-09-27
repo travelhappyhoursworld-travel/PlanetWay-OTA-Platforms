@@ -24,13 +24,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 app.use(cors());
 
-app.use((req, res, next) => {
-  if (req.originalUrl === "/api/stripe/webhook") {
-    return next();
-  }
-
-  express.json()(req, res, next);
-});
+app.use(express.json({ strict: true, limit: "1mb" }));
 app.use("/api/amadeus", amadeusRouter);
 app.use("/api/hotelbeds", hotelbedsRouter);
 

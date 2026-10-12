@@ -1,5 +1,7 @@
 const express = require("express");
 const { getFirestore } = require("firebase-admin/firestore");
+const { getAuth } = require("firebase-admin/auth");
+const { Resend } = require("resend");
 const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_JSON ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON) : require("C:\\Users\\Korisnik\\Documents\\PlanetWaySecrets\\firebase-service-account.json");
 const { cert, initializeApp } = require("firebase-admin/app");
 initializeApp({
@@ -21,12 +23,16 @@ dotenv.config({
 });
 const app = express();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
+app.locals.resend = resend;
 
 app.use(cors());
 
 app.use(express.json({ strict: true, limit: "1mb" }));
 app.use("/api/amadeus", amadeusRouter);
 app.use("/api/hotelbeds", hotelbedsRouter);
+const axionAdsRouter = require("./axionAdsRouter.cjs");
+app.use("/api/axion-ads", axionAdsRouter);
 
 const { Environment } = require("@paypal/paypal-server-sdk");
 
